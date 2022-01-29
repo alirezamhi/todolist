@@ -8,20 +8,21 @@ todoButton.addEventListener('click' , addTodo);
 function addTodo(event){
     event.preventDefault();
     if(todoInput.value === ''){
-       textError.innerHTML = '<p class = red>please add text</p>';
+        textError.innerHTML = '<p class = red>please write text</p>';
     }else{
         textError.innerHTML = '';
         const todoDiv = document.createElement('div');
         todoDiv.classList.add("todoDiv");
-
+        
         const newTodo = document.createElement('li');
         newTodo.innerText = todoInput.value ; 
+        saveLocalTodo(todoInput.value);
 
         
         todoDiv.appendChild(newTodo);
         todoInput.value = "" ;
         // add checked button
-        const completeButton = document.createElement('button');
+        const completeButton = document.createElement("button");
         completeButton.innerHTML = "<i class='fas fa-check-square'></i>";
         completeButton.classList.add("checked")
         todoDiv.appendChild(completeButton);
@@ -32,7 +33,6 @@ function addTodo(event){
         todoDiv.appendChild(trashButton);
         // add to list
         todoList.appendChild(todoDiv);
-        saveLocalTodo(todoInput.value);
     }    
 }
 
