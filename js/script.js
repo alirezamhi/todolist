@@ -46,3 +46,29 @@ function saveLocalTodo(todo) {
     todos.push(todo);
     localStorage.setItem("todos", JSON.stringify(todos))
 }
+
+todoList.addEventListener("click" , deletecheckedtodo);
+function deletecheckedtodo(event){
+    const todoItem = event.target;
+    
+    if (todoItem.classList[0] === "checked"){
+        const todoAll = todoItem.parentElement;
+        todoAll.classList.toggle("completed");
+    }else if(todoItem.classList[0] === "trash"){
+        const todoAll = todoItem.parentElement;
+        removeLocalstorage(todoAll)
+        todoAll.remove();
+    }
+}
+
+function removeLocalstorage(todo){
+    let todos;
+    if(localStorage.getItem("todos") === null){
+        todos = [];
+    }else{
+        todos = JSON.parse(localStorage.getItem("todos")) ;
+    }
+    const todoDelete = todo.children[0].innerText;
+    todos.splice(todos.indexOf(todoDelete) , 1);
+    localStorage.setItem("todos" , JSON.stringify(todos));
+}
